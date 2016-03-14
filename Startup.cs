@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MusicStoreWebApp.Models;
 using MusicStoreWebApp.Services;
+using MusicStoreWebApp.Entities;
 
 namespace MusicStoreWebApp
 {
@@ -45,7 +46,8 @@ namespace MusicStoreWebApp
             services.AddEntityFramework()
                 .AddSqlite()
                 .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite(Configuration["Data:DefaultConnection:ConnectionString"]));
+                    options.UseSqlite(Configuration["Data:DefaultConnection:ConnectionString"]))
+                .AddDbContext<ChinookDbContext>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
