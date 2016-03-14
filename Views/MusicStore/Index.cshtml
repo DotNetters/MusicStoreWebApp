@@ -1,0 +1,21 @@
+@{
+     ViewBag.Title = "Listado de canciones";
+}
+<h1>Listado de canciones</h1>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Artista</th>
+            <th>Album</th>
+            <th>Canción</th>
+        </tr>
+    </thead>
+     
+    @foreach(var track in ViewBag.Tracks){                
+        <tr>
+            <td>@track.Artist</td>
+            <td>@track.Album</td>
+            <td>@track.TrackName</td>
+        </tr>
+    }       
+</table>
