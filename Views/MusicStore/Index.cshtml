@@ -8,6 +8,7 @@
             <th>Artista</th>
             <th>Album</th>
             <th>Canción</th>
+            <th></th>
         </tr>
     </thead>
      
@@ -16,6 +17,14 @@
             <td>@track.Artist</td>
             <td>@track.Album</td>
             <td>@track.TrackName</td>
+            <td>
+                @if(!@track.InCart) {
+                <a class="btn btn-primary" asp-controller="MusicStore" asp-action="AddToCart" asp-route-id="@track.TrackId">La quiero</a>
+                }
+                else {
+                <a class="btn btn-default" asp-controller="MusicStore" asp-action="RemoveFromCart" asp-route-id="@track.TrackId">No la quiero</a>                    
+                }
+            </td>
         </tr>
     }       
 </table>

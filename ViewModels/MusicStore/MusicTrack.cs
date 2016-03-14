@@ -12,6 +12,8 @@ namespace MusicStoreWebApp.ViewModels.MusicStore
         
         public string Artist { get; set; }
         
-        public string Album { get; set; }        
+        public string Album { get; set; }
+        
+        public bool InCart { get; set; }        
     }
 }
