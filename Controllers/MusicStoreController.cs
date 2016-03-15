@@ -47,15 +47,15 @@ namespace MusicStoreWebApp.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ViewBag.Tracks = DbContext.Track.Select(t => new MusicTrack 
+            /*ViewBag.Tracks = DbContext.Track.Select(t => new MusicTrack 
             {
                 Artist = t.Album.Artist.Name,  
                 Album = t.Album.Title,
                 TrackId = t.TrackId, 
                 TrackName = t.Name,
                 InCart = ShoppingCartService.HasItem(ShopingCartId, t.TrackId)
-            });             
-            return View();
+            });*/             
+            return View("IndexAngular");
         }
         
         public IActionResult AddToCart(long id)

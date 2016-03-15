@@ -1,0 +1,24 @@
+@{
+     ViewBag.Title = "Listado de canciones";
+}
+<h1>Listado de canciones</h1>
+<table class="table table-striped table-bordered" ng-app="app" ng-controller="musicStoreCtrl as vm">
+    <thead>
+        <tr>
+            <th>Artista</th>
+            <th>Album</th>
+            <th>Canción</th>
+            <th></th>
+        </tr>
+    </thead>
+     
+    <tr ng-repeat="track in vm.tracks">
+        <td>{{track.Artist}}</td>
+        <td>{{track.Album}}</td>
+        <td>{{track.TrackName}}</td>
+        <td>
+            <a ng-if="!vm.IsInCart(track.TrackId)" class="btn btn-primary" ng-click="vm.AddToCart(track.TrackId)">La quiero</a>
+            <a ng-if="vm.IsInCart(track.TrackId)" class="btn btn-default" ng-click="vm.RemoveFromCart(track.TrackId)">No la quiero</a>                    
+        </td>
+    </tr>
+</table>
