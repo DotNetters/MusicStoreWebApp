@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using MusicStoreWebApp.Entities;
 using MusicStoreWebApp.Services;
@@ -29,15 +30,11 @@ namespace MusicStoreWebApp.Controllers
            {
                 if (_shopingCartId == null)
                 {
-                    var cookie = Request.Cookies["ShopingCartId"];
-                    if (cookie.Count > 0)
-                    {
-                        _shopingCartId = cookie.FirstOrDefault();
-                    }
-                    else 
+                    _shopingCartId = HttpContext.Session.GetString("ShopingCartId");
+                    if (_shopingCartId == null)
                     {
                         _shopingCartId = ShoppingCartService.NewCart();                        
-                        Response.Cookies.Append("ShopingCartId", _shopingCartId);
+                        HttpContext.Session.SetString("ShopingCartId", _shopingCartId);
                     }
                 }
                 return _shopingCartId;
@@ -47,15 +44,15 @@ namespace MusicStoreWebApp.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            /*ViewBag.Tracks = DbContext.Track.Select(t => new MusicTrack 
+            ViewBag.Tracks = DbContext.Track.Select(t => new MusicTrack 
             {
                 Artist = t.Album.Artist.Name,  
                 Album = t.Album.Title,
                 TrackId = t.TrackId, 
                 TrackName = t.Name,
                 InCart = ShoppingCartService.HasItem(ShopingCartId, t.TrackId)
-            });*/             
-            return View("IndexAngular");
+            });             
+            return View("Index");
         }
         
         public IActionResult AddToCart(long id)

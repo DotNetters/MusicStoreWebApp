@@ -54,6 +54,8 @@ namespace MusicStoreWebApp
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddCaching(); // Adds a default in-memory implementation of     IDistributedCache
+            services.AddSession();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -97,6 +99,8 @@ namespace MusicStoreWebApp
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
+            app.UseSession();
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
